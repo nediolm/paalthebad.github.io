@@ -1,0 +1,5 @@
+Ali|16|Sessiz ama sinsi|Koridorda takılıyor|Herkesi izler
+tako|16|Huyu suyu vardır|Sınıfta muhabbet çevirir, derse de katılır|Sigara içmez
+Mehmet|17|Çok konuşur|Sınıfta muhabbet çevirir|Ödev yapmaz
+Ahmet Şahin|16|Kilolu, kısa saç|Bahçede gezer, küfür eder|Sigara şüpheli arkadaş ortamı içiyor
+Kerem|15|Sporcu takılır|Sürekli basket oynar|Protein tozu konuşur

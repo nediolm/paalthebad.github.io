@@ -2,13 +2,17 @@
 let students = {};
 
 fetch("students.txt")
-.then(response => response.text())
+.then(response => {
+    if (!response.ok) {
+        throw new Error("Dosya bulunamadı");
+    }
+    return response.text();
+})
 .then(data => {
-    const lines = data.split("\n");
+    const lines = data.trim().split("\n");
 
     lines.forEach(line => {
         const parts = line.split("|");
-
         if(parts.length === 5){
             students[parts[0]] = {
                 age: parts[1],
@@ -18,14 +22,22 @@ fetch("students.txt")
             };
         }
     });
+})
+.catch(error => {
+    console.error("HATA:", error);
 });
 
 function openProfile(name){
+    if(!students[name]){
+        alert("Veri yüklenmedi.");
+        return;
+    }
+
     document.getElementById("studentName").innerText = name;
     document.getElementById("age").innerText = "Yaş: " + students[name].age;
     document.getElementById("feature").innerText = "Görünüş: " + students[name].feature;
-    document.getElementById("doing").innerText = "Hobi ve Alışkanlıkları: " + students[name].doing;
-    document.getElementById("extra").innerText = "Sigara: " + students[name].extra;
+    document.getElementById("doing").innerText = "Hobi: " + students[name].doing;
+    document.getElementById("extra").innerText = "Ekstra: " + students[name].extra;
 
     document.getElementById("profileBox").style.display = "flex";
 }

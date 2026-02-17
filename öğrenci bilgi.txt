@@ -1,0 +1,4 @@
+Ali|16|Sessiz ama sinsi|Koridorda takılır|Herkesi izler
+Mehmet|17|Çok konuşur|Sınıfta muhabbet çevirir|Ödev yapmaz
+Kerem|15|Sporcu tip|Basket oynar|Protein muhabbeti yapar
+Taha|16|Sakin ama zeki|Derse katılır|Sigara içmez

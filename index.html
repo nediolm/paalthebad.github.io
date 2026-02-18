@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Öğrenciler</title>
+<title>Okul Öğrencileri</title>
 
 <style>
 body{
@@ -11,6 +11,40 @@ body{
     font-family:Arial, sans-serif;
     background:#0f0f0f;
     color:white;
+}
+
+/* LOGIN */
+#loginBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+}
+
+input{
+    padding:10px;
+    width:250px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#444;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#666;
+}
+
+/* SITE */
+#mainContent{
+    display:none;
 }
 
 header{
@@ -66,13 +100,23 @@ header{
 
 <body>
 
+<!-- LOGIN EKRANI -->
+<div id="loginBox">
+    <h2>Giriş Yap</h2>
+    <input type="email" id="email" placeholder="E-posta"><br><br>
+    <input type="password" id="password" placeholder="Şifre"><br><br>
+    <button onclick="login()">Giriş</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<!-- ANA SITE -->
+<div id="mainContent">
+
 <header>
     <h1>Okul Öğrencileri</h1>
 </header>
-    
-<div class="students" id="studentsContainer" style="display:none;"></div>
-    
-<header id="mainHeader" style="display:none;">
+
+<div class="students" id="studentsContainer"></div>
 
 <div id="profileBox" class="profile">
     <span class="close" onclick="closeProfile()">X</span>
@@ -82,18 +126,36 @@ header{
     <p id="doing"></p>
     <p id="extra"></p>
 </div>
-    
-<div id="loginBox" style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;">
-    <h2>Giriş Yap</h2>
-    <input type="email" id="email" placeholder="E-posta"><br><br>
-    <input type="password" id="password" placeholder="Şifre"><br><br>
-    <button onclick="login()">Giriş</button>
-    <p id="error" style="color:red;"></p>
+
 </div>
 
 <script>
 
 let students = {};
+
+/* LOGIN SISTEMI */
+function login(){
+
+    const correctEmail = "admin@gmail.com";
+    const correctPassword = "12345";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(email === correctEmail && password === correctPassword){
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+
+        loadStudents();
+
+    } else {
+        document.getElementById("error").innerText = "Hatalı giriş!";
+    }
+}
+
+/* TXT DOSYASINI YUKLEME */
+function loadStudents(){
 
 fetch("students.txt")
 .then(response => response.text())
@@ -117,7 +179,6 @@ fetch("students.txt")
                 extra: parts[4]
             };
 
-            // Kartı otomatik oluştur
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = "<h3>" + name + "</h3>";
@@ -129,7 +190,9 @@ fetch("students.txt")
     });
 
 });
+}
 
+/* PROFIL ACMA */
 function openProfile(name){
 
     document.getElementById("studentName").innerText = name;
@@ -145,27 +208,7 @@ function closeProfile(){
     document.getElementById("profileBox").style.display = "none";
 }
 
-    function login(){
-
-    const correctEmail = "admin@gmail.com";
-    const correctPassword = "12345";
-
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    if(email === correctEmail && password === correctPassword){
-
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("studentsContainer").style.display = "flex";
-        document.getElementById("mainHeader").style.display = "block";
-
-    } else {
-        document.getElementById("error").innerText = "Hatalı giriş!";
-    }
-}
-
 </script>
 
 </body>
 </html>
-

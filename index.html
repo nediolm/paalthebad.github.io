@@ -69,8 +69,10 @@ header{
 <header>
     <h1>Okul Öğrencileri</h1>
 </header>
-
-<div class="students" id="studentsContainer"></div>
+    
+<div class="students" id="studentsContainer" style="display:none;"></div>
+    
+<header id="mainHeader" style="display:none;">
 
 <div id="profileBox" class="profile">
     <span class="close" onclick="closeProfile()">X</span>
@@ -79,6 +81,14 @@ header{
     <p id="feature"></p>
     <p id="doing"></p>
     <p id="extra"></p>
+</div>
+    
+<div id="loginBox" style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;">
+    <h2>Giriş Yap</h2>
+    <input type="email" id="email" placeholder="E-posta"><br><br>
+    <input type="password" id="password" placeholder="Şifre"><br><br>
+    <button onclick="login()">Giriş</button>
+    <p id="error" style="color:red;"></p>
 </div>
 
 <script>
@@ -135,7 +145,27 @@ function closeProfile(){
     document.getElementById("profileBox").style.display = "none";
 }
 
+    function login(){
+
+    const correctEmail = "admin@gmail.com";
+    const correctPassword = "12345";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(email === correctEmail && password === correctPassword){
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("studentsContainer").style.display = "flex";
+        document.getElementById("mainHeader").style.display = "block";
+
+    } else {
+        document.getElementById("error").innerText = "Hatalı giriş!";
+    }
+}
+
 </script>
 
 </body>
 </html>
+
